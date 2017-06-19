@@ -31,6 +31,8 @@ function rabbitmq_config(){
     cat <<-EOF > /etc/rabbitmq/rabbitmq.config
 	[
 	  {rabbit, [
+	    {ssl_listeners, [5671]},
+	    {ssl_options, [{cacertfile, "$CACERT_FILE"}, {certfile, "$CERT_FILE"}, {keyfile, "$KEY_FILE"}, {verify,verify_peer},{fail_if_no_peer_cert,false}],
 	    {cluster_partition_handling, autoheal},
 	    {cluster_nodes, {[${RABBITMQ_CLUSTER_NODES}], disc}}
 	  ]},
@@ -58,6 +60,12 @@ RABBITMQ_NODENAME=${RABBITMQ_NODENAME:-}
 if [ ! -z "$RABBITMQ_NODENAME" ]; then
   echo "RABBITMQ_NODENAME=${RABBITMQ_NODENAME}" > /etc/rabbitmq/rabbitmq-env.conf
 fi
+
+
+# tls config
+TLS_CACERT_FILE=${CACERT_FILE:-/certs/default/rabbit.crt}
+TLS_CERT_FILE=${CERT_FILE:-/certs/default/rabbit.crt}
+TLS_KEY_FILE=${KEY_FILE:-/certs/default/rabbit.key}
 
 # rabbitmqctl
  echo "export RABBITMQ_USE_LONGNAME=true" > /etc/profile.d/rabbitmqctl.sh
