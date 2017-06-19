@@ -2,7 +2,7 @@
 
 git_commit=$(git rev-parse --short HEAD)
 image_name=$1:$git_commit
-container_name=rabbitmq-server-$git_commit
+container_name=rabbitmq-cluster-$git_commit
 
 tests=0
 failures=0
