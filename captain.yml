@@ -1,0 +1,10 @@
+---
+rabbitmq-cluster:
+  build: Dockerfile
+  image: ci-server:5000/rabbitmq-cluster
+  pre:
+    - echo "Preparing rabbitmq-cluster"
+  test:
+    - ./tests/unit.sh ci-server:5000/rabbitmq-cluster
+  post:
+    - echo "Finished rabbitmq-cluster"
