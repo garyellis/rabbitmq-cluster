@@ -43,14 +43,19 @@ test_root_user(){
     echo "    docker exec $container_name ps -ef"
     root_process_count=$(
         docker exec $container_name ps -ef |
-        grep -v ps|awk '$1=="root" { print $0}' | wc -l
+        grep -v ps|awk '$1=="foo" { print $0}' | wc -l
     )
     tests_summary $root_process_count
+}
+test_tls_listener(){
+    docker exec $container_name yum -y install openssl
+    docker exec $container_name openssl s_client -connect localhost:5671 2>/dev/null <<<""|sed -n '/-----BEGIN/,/-----END/p'
 }
 
 setup_
 test_rabbitmqctl_status
 test_root_user
+test_tls_listener
 teardown_
 
 echo -e "\ntests: $tests failures: $failures\n"
