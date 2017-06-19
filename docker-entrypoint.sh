@@ -31,8 +31,8 @@ function rabbitmq_config(){
     cat <<-EOF > /etc/rabbitmq/rabbitmq.config
 	[
 	  {rabbit, [
-	    {ssl_listeners, [5671]},
-	    {ssl_options, [{cacertfile, "$TLS_CACERT_FILE"}, {certfile, "$TLS_CERT_FILE"}, {keyfile, "$TLS_KEY_FILE"}, {verify,verify_peer},{fail_if_no_peer_cert,false}]},
+	    $([ ! -z "$TLS_ENABLED" ] && echo {ssl_listeners, [5671]},)
+	    $([ ! -z "$TLS_ENABLED" ] && echo {ssl_options, [{cacertfile, "$TLS_CACERT_FILE"}, {certfile, "$TLS_CERT_FILE"}, {keyfile, "$TLS_KEY_FILE"}, {verify,verify_peer},{fail_if_no_peer_cert,false}]},)
 	    {cluster_partition_handling, autoheal},
 	    {cluster_nodes, {[${RABBITMQ_CLUSTER_NODES}], disc}}
 	  ]},
