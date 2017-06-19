@@ -35,7 +35,7 @@ VOLUME /var/lib/rabbitmq
 
 EXPOSE 4369 5671 5672 15672 25672 24471
 
-COPY ./certs /
+COPY ./certs /certs
 
 COPY ./docker-entrypoint.sh /
 
