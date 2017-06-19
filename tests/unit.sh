@@ -50,7 +50,7 @@ test_root_user(){
 test_tls_listener(){
     echo "==> test tls listener handshake"
     docker exec $container_name yum -y install openssl
-    docker exec $container_name timeout 5 openssl s_client -msg -state -connect localhost:5671 2>/dev/null <<<""
+    docker exec $container_name timeout 5 openssl s_client -CAfile /certs/default/rabbitmq.crt -msg -state -connect localhost:5671 2>/dev/null <<<""
     retval=$?
     echo retval: $retval
     tests_summary $retval
