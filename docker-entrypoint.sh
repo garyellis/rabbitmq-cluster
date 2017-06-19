@@ -32,7 +32,7 @@ function rabbitmq_config(){
 	[
 	  {rabbit, [
 	    {ssl_listeners, [5671]},
-	    {ssl_options, [{cacertfile, "$TLS_CACERT_FILE"}, {certfile, "$TLS_CERT_FILE"}, {keyfile, "$TLS_KEY_FILE"}, {verify,verify_peer},{fail_if_no_peer_cert,false}],
+	    {ssl_options, [{cacertfile, "$TLS_CACERT_FILE"}, {certfile, "$TLS_CERT_FILE"}, {keyfile, "$TLS_KEY_FILE"}, {verify,verify_peer},{fail_if_no_peer_cert,false}]},
 	    {cluster_partition_handling, autoheal},
 	    {cluster_nodes, {[${RABBITMQ_CLUSTER_NODES}], disc}}
 	  ]},
