@@ -49,7 +49,8 @@ test_root_user(){
 }
 test_tls_listener(){
     docker exec $container_name yum -y install openssl
-    docker exec $container_name openssl s_client -connect localhost:5671 2>/dev/null <<<""|sed -n '/-----BEGIN/,/-----END/p'
+    docker exec $container_name timeout 5 openssl s_client -connect localhost:5671 2>/dev/null <<<""
+    tests_summary $?
 }
 
 setup_

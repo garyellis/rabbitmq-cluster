@@ -63,9 +63,9 @@ fi
 
 
 # tls config
-TLS_CACERT_FILE=${TLS_CACERT_FILE:-/certs/default/rabbit.crt}
-TLS_CERT_FILE=${TLS_CERT_FILE:-/certs/default/rabbit.crt}
-TLS_KEY_FILE=${TLS_KEY_FILE:-/certs/default/rabbit.key}
+TLS_CACERT_FILE=${TLS_CACERT_FILE:-/certs/default/rabbitmq.crt}
+TLS_CERT_FILE=${TLS_CERT_FILE:-/certs/default/rabbitmq.crt}
+TLS_KEY_FILE=${TLS_KEY_FILE:-/certs/default/rabbitmq.key}
 
 
 # rabbitmqctl
