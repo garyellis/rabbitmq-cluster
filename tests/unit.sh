@@ -48,9 +48,12 @@ test_root_user(){
     tests_summary $root_process_count
 }
 test_tls_listener(){
+    echo "==> test tls listener handshake"
     docker exec $container_name yum -y install openssl
-    docker exec $container_name timeout 5 openssl s_client -connect localhost:5671 2>/dev/null <<<""
-    tests_summary $?
+    docker exec $container_name timeout 5 openssl s_client -msg -state -connect localhost:5671 2>/dev/null <<<""
+    retval=$?
+    echo retval: $retval
+    tests_summary $retval
 }
 
 setup_
